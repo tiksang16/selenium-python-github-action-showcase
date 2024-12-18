@@ -3,7 +3,7 @@ name: Deploy QE-index.html to S3
 on:
   push:
     paths:
-      - resources/QE-index.html 
+      - QE-index.html 
 
 jobs:
   deploy:
