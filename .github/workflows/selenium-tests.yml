@@ -50,6 +50,3 @@ jobs:
         ALLURE_BUCKET_NAME: ${{ secrets.ALLURE_BUCKET_NAME }}
       run: |
         aws s3 sync allure-report/ s3://$ALLURE_BUCKET_NAME/ --acl public-read --delete
-
-    - name: Display Allure Report URL
-      run: echo "Allure Report available at: http://${{ secrets.ALLURE_BUCKET_NAME }}.s3-website-${{ secrets.AWS_REGION }}.amazonaws.com/"
