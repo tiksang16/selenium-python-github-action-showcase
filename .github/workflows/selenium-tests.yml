@@ -17,7 +17,26 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
-        python-version: 3.13
+        python-version: 3.10
+
+    - name: Install Chrome Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          google-chrome-stable \
+          libnss3 \
+          libgconf-2-4 \
+          libxi6 \
+          libgdk-pixbuf2.0-0 \
+          fonts-liberation \
+          libappindicator3-1 \
+          xdg-utils \
+          libatk1.0-0 \
+          libxrandr2 \
+          libxss1 \
+          libasound2 \
+          libpangocairo-1.0-0 \
+          libgtk-3-0
 
     - name: Install dependencies
       run: pip install -r requirements.txt

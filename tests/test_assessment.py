@@ -11,10 +11,17 @@ BASE_URL = "http://selenium-python-resolver.s3-website.us-east-2.amazonaws.com/"
 
 @pytest.fixture(scope="function")
 def driver():
+    # Set Chrome options to run in headless mode
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Run Chrome in headless mode
+    chrome_options.add_argument("--no-sandbox")  # Prevent issues with sandboxing
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Prevent /dev/shm issues
+    chrome_options.add_argument("--disable-gpu")  # Disable GPU for headless mode
+    chrome_options.add_argument("--window-size=1920,1080")  # Set a default screen size
+
     # Set up the Chrome WebDriver
     service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service)
-    driver.maximize_window()
+    driver = webdriver.Chrome(service=service, options=chrome_options)
     yield driver
     driver.quit()
 
