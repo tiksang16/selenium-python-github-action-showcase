@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+    <title>Home</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Test Page</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="guide.html">Guide</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="jumbotron">
+            <div class="col-sm-4 mx-auto" id="test-1-div">
+                <h1>Test 1</h1>
+                <form class="form-signin">
+                    <h2 class="form-signin-heading">Sample Login</h2>
+                    <label for="inputEmail" class="sr-only">Email address</label>
+                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="jumbotron">
+            <div class="col-sm-4 mx-auto" id="test-2-div">
+                <h1>Test 2</h1>
+                <ul class="list-group">
+                    <li class="list-group-item justify-content-between">
+                        List Item 1
+                        <span class="badge badge-pill badge-primary">3</span>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        List Item 2
+                        <span class="badge badge-pill badge-primary">6</span>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        List Item 3
+                        <span class="badge badge-pill badge-primary">9</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="jumbotron">
+            <div class="col-sm-4 mx-auto" id="test-3-div">
+                <h1>Test 3</h1>
+                <!-- change the dropdown button text -->
+                <script type="text/javascript">
+                    $(function() {
+                        $('.dropdown-item').click(function() {
+                            $('#dropdownMenuButton').text($(this).text());
+                        });
+                    });
+                </script>
+
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Option 1
+                </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item">Option 1</a>
+                        <a class="dropdown-item">Option 2</a>
+                        <a class="dropdown-item">Option 3</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="jumbotron">
+            <div class="col-sm-4 mx-auto" id="test-4-div">
+                <h1>Test 4</h1>
+                <button type="button" class="btn btn-lg btn-primary">Button</button>
+                <button type="button" class="btn btn-lg btn-secondary" disabled>Button</button>
+            </div>
+        </div>
+
+        <div class="jumbotron">
+            <div class="col-sm-4 mx-auto" id="test-5-div">
+                <h1>Test 5</h1>
+                <p id="test5-placeholder">A button will eventually show up here...</p>
+                <!-- show the button after 5 seconds -->
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        setTimeout(function() {
+                            $('#test5-button').show();
+                            $('#test5-placeholder').hide();
+                        }, (Math.floor(Math.random() * 10) + 1) * 1000);
+                    });
+                </script>
+
+                <!-- display an alert after clicking the button -->
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('#test5-button').click(function() {
+                            $('#test5-alert').show();
+                            $('#test5-button').prop('disabled', true);
+                        })
+                    });
+                </script>
+
+                <div class="alert alert-success" role="alert" id="test5-alert" style="display: none;">
+                    You clicked a button!
+                </div>
+
+                <button type="button" class="btn btn-lg btn-primary" style="display: none;" id="test5-button">Button
+            </button>
+            </div>
+        </div>
+
+        <div class="jumbotron">
+            <div class="col-sm-4 mx-auto" id="test-6-div">
+                <h1>Test 6</h1>
+                <div>
+                    <table class="table table-bordered table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">App Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Brietta</td>
+                                <td>Tinmouth</td>
+                                <td>Cardguard</td>
+                            </tr>
+                            <tr>
+                                <td>Griff</td>
+                                <td>Carswell</td>
+                                <td>It</td>
+                            </tr>
+                            <tr>
+                                <td>Thadeus</td>
+                                <td>Posselt</td>
+                                <td>Ventosanzap</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
