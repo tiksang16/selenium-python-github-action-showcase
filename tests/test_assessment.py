@@ -66,20 +66,55 @@ def test_1_login_form(driver):
 
 
 
-# def test_2_list_group(driver):
-#     """Test 2: Verify list group values."""
-#     driver.get(BASE_URL)
+@allure.title("Test 2: Verify List Group Values in Test 2 Div")
+@allure.description("This test verifies the list group in the Test 2 div. It checks the number of items, the text of the second list item, and its badge value.")
+def test_2_list_group(driver):
+    """Test 2: Verify List Group Values in Test 2 Div."""
 
-#     # Assert there are 3 list items
-#     list_items = driver.find_elements(By.XPATH, "//div[@id='test-2-div']//li")
-#     assert len(list_items) == 3
+    with allure.step("Navigate to the home page"):
+        driver.get(BASE_URL)
 
-#     # Assert the second list item's text and badge value
-#     second_item_text = list_items[1].text
-#     second_item_badge = list_items[1].find_element(By.XPATH, ".//span").text
-#     assert "List Item 2" in second_item_text
-#     assert second_item_badge == "6"
+    with allure.step("Locate the Test 2 div and assert there are three list items"):
+        # Locate all list items in the Test 2 div
+        list_items = WebDriverWait(driver, 10).until(
+            EC.presence_of_all_elements_located((By.XPATH, "//div[@id='test-2-div']//li"))
+        )
 
+        # Extract the text values of the list items
+        list_texts = [item.text for item in list_items]
+
+        # Log the extracted texts for debugging
+        print(f"List Items Text: {list_texts}")
+        allure.attach("\n".join(list_texts), name="List Items Text", attachment_type=allure.attachment_type.TEXT)
+
+        # Assert the number of items in the list
+        assert len(list_items) == 3, f"Expected 3 list items, but found {len(list_items)}"
+
+    with allure.step("Assert that the second list item's text is 'List Item 2'"):
+        # Locate the second <li> element
+        second_list_item = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div[@id='test-2-div']//li[2]"))
+        )
+
+        # Get the full text of the <li> element
+        full_text = second_list_item.text  # Includes 'List Item 2 6'
+
+        # Get the text of the <span> element inside the <li>
+        badge_text = second_list_item.find_element(By.XPATH, ".//span").text  # '6'
+
+        # Subtract the badge text from the full text to get the desired value
+        second_item_text = full_text.replace(badge_text, "").strip()  # 'List Item 2'
+
+        # Log and assert the text
+        print(f"Second item text: {second_item_text}")
+        allure.attach(second_item_text, name="Second List Item Text", attachment_type=allure.attachment_type.TEXT)
+        assert second_item_text == "List Item 2", f"Expected 'List Item 2', but found '{second_item_text}'"
+
+    with allure.step("Assert that the second list item's badge value is '6'"):
+        # Assert the badge value
+        print(f"Second item badge value: {badge_text}")
+        allure.attach(badge_text, name="Second List Item Badge Value", attachment_type=allure.attachment_type.TEXT)
+        assert badge_text == "6", f"Expected badge value '6', but found '{badge_text}'"
 
 # def test_3_select_option(driver):
 #     """Test 3: Verify default and selectable dropdown options."""
