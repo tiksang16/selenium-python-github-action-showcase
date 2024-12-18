@@ -22,4 +22,4 @@ jobs:
 
     - name: Deploy QE-index.html to S3
       run: |
-        aws s3 cp QE-index.html s3://${{ secrets.S3_BUCKET_NAME }}/QE-index.html --acl public-read
+        aws s3 cp QE-index.html s3://${{ secrets.S3_BUCKET_NAME }}/QE-index.html
