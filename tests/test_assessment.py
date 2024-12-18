@@ -4,20 +4,24 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 # Base URL for the HTML file
-BASE_URL = "http://selenium-python-resolver.s3-website.us-east-2.amazonaws.com/"
+BASE_URL = "http://selenium-python-resolver.s3-website.us-east-2.amazonaws.com/"  
 
 @pytest.fixture(scope="function")
 def driver():
-    # Set Chrome options to run in headless mode
+    # Set Chrome options
     chrome_options = Options()
-    chrome_options.add_argument("--headless")  # Run Chrome in headless mode
-    chrome_options.add_argument("--no-sandbox")  # Prevent issues with sandboxing
-    chrome_options.add_argument("--disable-dev-shm-usage")  # Prevent /dev/shm issues
-    chrome_options.add_argument("--disable-gpu")  # Disable GPU for headless mode
-    chrome_options.add_argument("--window-size=1920,1080")  # Set a default screen size
+
+    # Check if the script is running in CI/CD (e.g., GitHub Actions)
+    if os.getenv("CI"):  # Headless mode for CI
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.add_argument("--disable-gpu")
+        chrome_options.add_argument("--window-size=1920,1080")
 
     # Set up the Chrome WebDriver
     service = Service(ChromeDriverManager().install())
