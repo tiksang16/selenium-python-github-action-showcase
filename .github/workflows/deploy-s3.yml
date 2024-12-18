@@ -1,0 +1,25 @@
+name: Deploy QE-index.html to S3
+
+on:
+  push:
+    paths:
+      - resources/QE-index.html 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v3
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Deploy QE-index.html to S3
+      run: |
+        aws s3 cp resources/QE-index.html s3://${{ secrets.S3_BUCKET_NAME }}/QE-index.html --acl public-read
