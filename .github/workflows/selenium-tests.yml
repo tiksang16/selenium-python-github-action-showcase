@@ -1,10 +1,10 @@
 name: Run Selenium Tests and Deploy Allure Report
 
 on:
-  workflow_dispatch:
   push:
     branches:
-      - main 
+      - main
+  workflow_dispatch:
 
 jobs:
   run-tests:
@@ -25,13 +25,18 @@ jobs:
     - name: Run Selenium Tests
       run: pytest --alluredir=reports
 
-    - name: Configure AWS credentials
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: ${{ secrets.AWS_REGION }}
+    - name: Install AWS CLI
       run: |
-        aws s3 sync reports/ s3://${{ secrets.AWS_REPORT_BUCKET_NAME }}/ --acl public-read
+        sudo apt-get update
+        sudo apt-get install -y awscli
+
+    - name: Install Allure CLI
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y openjdk-11-jre
+        curl -sSL https://github.com/allure-framework/allure2/releases/download/2.22.5/allure-2.22.5.tgz | tar -xz
+        sudo mv allure-2.22.5 /opt/allure
+        sudo ln -s /opt/allure/bin/allure /usr/bin/allure
 
     - name: Generate Static Allure Report
       run: |
@@ -39,6 +44,9 @@ jobs:
 
     - name: Upload Allure Report to S3
       env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
         ALLURE_BUCKET_NAME: ${{ secrets.ALLURE_BUCKET_NAME }}
       run: |
         aws s3 sync allure-report/ s3://$ALLURE_BUCKET_NAME/ --acl public-read --delete
