@@ -116,18 +116,49 @@ def test_2_list_group(driver):
         allure.attach(badge_text, name="Second List Item Badge Value", attachment_type=allure.attachment_type.TEXT)
         assert badge_text == "6", f"Expected badge value '6', but found '{badge_text}'"
 
-# def test_3_select_option(driver):
-#     """Test 3: Verify default and selectable dropdown options."""
-#     driver.get(BASE_URL)
+@allure.title("Test 3: Verify default selection and change dropdown value in Test 3 div")
+@allure.description("This test verifies that 'Option 1' is the default selected value in the Test 3 dropdown and then selects 'Option 3'")
+def test_3_dropdown(driver):
+    """Test 3: Verify default selection and select Option 3 in Test 3 div."""
 
-#     # Assert "Option 1" is selected by default
-#     dropdown = driver.find_element(By.XPATH, "//select[@id='dropdown']")
-#     selected_option = dropdown.find_element(By.XPATH, ".//option[@selected]").text
-#     assert selected_option == "Option 1"
+    with allure.step("Navigate to the home page"):
+        driver.get(BASE_URL)
 
-#     # Select "Option 3"
-#     dropdown.find_element(By.XPATH, ".//option[text()='Option 3']").click()
+    with allure.step("Locate the Test 3 dropdown button"):
+        # Locate the dropdown button
+        dropdown_button = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.ID, "dropdownMenuButton"))
+        )
 
+        # Verify the default selected option is "Option 1"
+        default_option = dropdown_button.text.strip()
+        print(f"Default selected option: {default_option}")
+        assert default_option == "Option 1", f"Expected 'Option 1', but found '{default_option}'"
+
+    with allure.step("Open the dropdown menu"):
+        # Click the dropdown button to open the menu
+        dropdown_button.click()
+
+        # Wait until the dropdown menu is visible
+        dropdown_menu = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((By.CLASS_NAME, "dropdown-menu"))
+        )
+        assert dropdown_menu.is_displayed(), "Dropdown menu is not visible"
+
+    with allure.step("Select 'Option 3' from the dropdown"):
+        # Locate and click the "Option 3" item within the visible dropdown menu
+        option_3 = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//div[contains(@class, 'dropdown-menu') and contains(@class, 'show')]//a[normalize-space()='Option 3']"))
+        )
+        option_3.click()
+
+        # Verify the dropdown button now shows "Option 3"
+        updated_option = dropdown_button.text.strip()
+        print(f"Updated selected option: {updated_option}")
+        assert updated_option == "Option 3", f"Expected 'Option 3', but found '{updated_option}'"
+
+        # Attach the updated option to the Allure report
+        allure.attach(updated_option, name="Updated Selected Option", attachment_type=allure.attachment_type.TEXT)
 
 # def test_4_button_states(driver):
 #     """Test 4: Verify button states."""
