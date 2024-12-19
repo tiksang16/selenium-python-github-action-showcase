@@ -1,4 +1,4 @@
-# Selenium Python Testing Project
+# Selenium-Python CI/CD Showcase
 
 This repository is designed to demonstrate automated testing using **Selenium** with **Python** and an integrated workflow for deploying test sites and reports. It includes the following:
 
