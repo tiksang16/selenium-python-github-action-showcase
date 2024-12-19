@@ -19,7 +19,7 @@ Before running the tests and viewing the Allure report locally, ensure you have 
 2. **Pip (Python Package Manager)**  
 
 3. **Allure Command-Line Tool**  
-   - Install Allure ([Installation Guide](https://docs.qameta.io/allure/#_installing_a_commandline)).  
+   - Install Allure ([Installation Guide](https://allurereport.org/docs/install/)).  
 
 ---
 
