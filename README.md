@@ -10,6 +10,35 @@ This repository is designed to demonstrate automated testing using **Selenium** 
 
 ---
 
+## **Prerequisites**
+
+Before running the tests and viewing the Allure report locally, ensure you have the following:
+
+1. **Python 3.7 or higher**  
+   - Verify by running: `python --version` or `python3 --version`.
+
+2. **Pip (Python Package Manager)**  
+   - Ensure `pip` is installed and updated:  
+     ```bash
+     pip install --upgrade pip
+     ```
+
+3. **Java 8 or higher** (required for Allure)  
+   - Verify by running: `java -version`.
+
+4. **Allure Command-Line Tool**  
+   - Install Allure ([Installation Guide](https://docs.qameta.io/allure/#_installing_a_commandline)).  
+   - Verify by running: `allure --version`.
+
+5. **Browser Driver for Selenium**  
+   - Install the driver for your browser (e.g., [ChromeDriver](https://sites.google.com/chromium.org/driver/)).  
+   - Ensure it matches your browser version.
+
+6. **Git** (optional, for cloning the repository)  
+   - Verify by running: `git --version`.
+
+---
+
 ## Accessing the Hosted URLs
 
 - **Test Site:**  
