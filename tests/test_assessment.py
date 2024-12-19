@@ -18,7 +18,7 @@ def driver():
     chrome_options = Options()
 
     # Check if the script is running in CI/CD (e.g., GitHub Actions)
-    if os.getenv("CI"):  # Headless mode for CI
+    if os.getenv("CI") or os.getenv("HEADLESS"):  
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
