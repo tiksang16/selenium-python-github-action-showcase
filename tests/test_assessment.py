@@ -31,45 +31,54 @@ def driver():
     yield driver
     driver.quit()
 
-@allure.title("Test 1: Verify Login Form Presence and Functionality")
-@allure.description("This test verifies the presence of the login form and checks that the email and password fields are functional.")
+
+@allure.title("Test 1: Verify Login Form Presence and Input Functionality")
+@allure.description("This test verifies the presence of the login form (email, password and login button) and allows input into the fields.")
 def test_1_login_form(driver):
-    """Test 1: Verify login form presence and functionality."""
 
     with allure.step("Navigate to the home page"):
+        # Navigate to the base URL
         driver.get(BASE_URL)
 
-    with allure.step("Wait for the email field to be visible and assert its presence"):
+    with allure.step("Locate and assert the presence of the email input field"):
+        # Locate the email input field
         email_field = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//input[@type='email']"))
+            EC.presence_of_element_located((By.ID, "inputEmail"))
         )
-        assert email_field.is_displayed(), "Email field is not visible on the page"
+        # Assert that the email field is displayed
+        assert email_field.is_displayed(), "Email input field is not visible on the page"
 
-    with allure.step("Wait for the password field to be visible and assert its presence"):
+    with allure.step("Locate and assert the presence of the password input field"):
+        # Locate the password input field
         password_field = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//input[@type='password']"))
+            EC.presence_of_element_located((By.ID, "inputPassword"))
         )
-        assert password_field.is_displayed(), "Password field is not visible on the page"
+        # Assert that the password field is displayed
+        assert password_field.is_displayed(), "Password input field is not visible on the page"
 
-    with allure.step("Wait for the sign-in button to be visible and assert its presence"):
-        sign_in_button = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//button[text()='Sign in']"))
+    with allure.step("Locate and assert the presence of the login button"):
+        # Locate the login button
+        login_button = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//button[@type='submit' and text()='Sign in']"))
         )
-        assert sign_in_button.is_displayed(), "Sign-in button is not visible on the page"
+        # Assert that the login button is displayed
+        assert login_button.is_displayed(), "Login button is not visible on the page"
 
     with allure.step("Enter email and password into the respective fields"):
+        # Enter the email address
         email_field.send_keys("test@example.com")
+        # Enter the password
         password_field.send_keys("password123")
+    
 
-    with allure.step("Click the sign-in button"):
-        sign_in_button.click()
-
+    with allure.step("Click the login button"):
+        # Click the login button
+        login_button.click()
 
 
 @allure.title("Test 2: Verify List Group Values in Test 2 Div")
-@allure.description("This test verifies the list group in the Test 2 div. It checks the number of items, the text of the second list item, and its badge value.")
+@allure.description("This test verifies the list group in the Test 2 div. It checks the number of items, the text of the second list item and its badge value.")
 def test_2_list_group(driver):
-    """Test 2: Verify List Group Values in Test 2 Div."""
 
     with allure.step("Navigate to the home page"):
         driver.get(BASE_URL)
@@ -83,8 +92,7 @@ def test_2_list_group(driver):
         # Extract the text values of the list items
         list_texts = [item.text for item in list_items]
 
-        # Log the extracted texts for debugging
-        print(f"List Items Text: {list_texts}")
+
         allure.attach("\n".join(list_texts), name="List Items Text", attachment_type=allure.attachment_type.TEXT)
 
         # Assert the number of items in the list
@@ -106,20 +114,18 @@ def test_2_list_group(driver):
         second_item_text = full_text.replace(badge_text, "").strip()  # 'List Item 2'
 
         # Log and assert the text
-        print(f"Second item text: {second_item_text}")
         allure.attach(second_item_text, name="Second List Item Text", attachment_type=allure.attachment_type.TEXT)
         assert second_item_text == "List Item 2", f"Expected 'List Item 2', but found '{second_item_text}'"
 
     with allure.step("Assert that the second list item's badge value is '6'"):
         # Assert the badge value
-        print(f"Second item badge value: {badge_text}")
         allure.attach(badge_text, name="Second List Item Badge Value", attachment_type=allure.attachment_type.TEXT)
         assert badge_text == "6", f"Expected badge value '6', but found '{badge_text}'"
+
 
 @allure.title("Test 3: Verify default selection and change dropdown value in Test 3 div")
 @allure.description("This test verifies that 'Option 1' is the default selected value in the Test 3 dropdown and then selects 'Option 3'")
 def test_3_dropdown(driver):
-    """Test 3: Verify default selection and select Option 3 in Test 3 div."""
 
     with allure.step("Navigate to the home page"):
         driver.get(BASE_URL)
@@ -132,7 +138,6 @@ def test_3_dropdown(driver):
 
         # Verify the default selected option is "Option 1"
         default_option = dropdown_button.text.strip()
-        print(f"Default selected option: {default_option}")
         assert default_option == "Option 1", f"Expected 'Option 1', but found '{default_option}'"
 
     with allure.step("Open the dropdown menu"):
@@ -154,16 +159,15 @@ def test_3_dropdown(driver):
 
         # Verify the dropdown button now shows "Option 3"
         updated_option = dropdown_button.text.strip()
-        print(f"Updated selected option: {updated_option}")
         assert updated_option == "Option 3", f"Expected 'Option 3', but found '{updated_option}'"
 
         # Attach the updated option to the Allure report
         allure.attach(updated_option, name="Updated Selected Option", attachment_type=allure.attachment_type.TEXT)
 
+
 @allure.title("Test 4: Verify button states in Test 4 div")
 @allure.description("This test verifies that the first button in Test 4 div is enabled and the second button is disabled")
 def test_4_buttons(driver):
-    """Test 4: Verify button states in Test 4 div."""
 
     with allure.step("Navigate to the home page"):
         driver.get(BASE_URL)
@@ -184,18 +188,15 @@ def test_4_buttons(driver):
     with allure.step("Assert that the first button is enabled"):
         # Assert that the first button is enabled
         assert first_button.is_enabled(), "The first button is not enabled"
-        print("The first button is enabled.")
 
     with allure.step("Assert that the second button is disabled"):
         # Assert that the second button is disabled
         assert not second_button.is_enabled(), "The second button is not disabled"
-        print("The second button is disabled.")
 
 
 @allure.title("Test 5: Wait for button to appear, click it, and verify success message")
 @allure.description("This test waits for a button to appear in Test 5 div, clicks it, verifies the success message, and ensures the button is disabled")
 def test_5_button(driver):
-    """Test 5: Wait for the button, click it, and verify success."""
 
     with allure.step("Navigate to the home page"):
         driver.get(BASE_URL)
@@ -212,7 +213,6 @@ def test_5_button(driver):
             EC.visibility_of_element_located((By.ID, "test5-button"))
         )
         assert button.is_displayed(), "The button is not displayed"
-        print("The button is now displayed.")
 
     with allure.step("Click the button"):
         # Click the button
@@ -224,19 +224,16 @@ def test_5_button(driver):
             EC.visibility_of_element_located((By.ID, "test5-alert"))
         )
         assert success_message.is_displayed(), "The success message is not displayed"
-        print(f"Success message displayed: {success_message.text}")
         assert success_message.text == "You clicked a button!", "Success message text is incorrect"
 
     with allure.step("Verify the button is now disabled"):
         # Assert that the button is disabled
         assert not button.is_enabled(), "The button is not disabled"
-        print("The button is now disabled.")
 
 
 @allure.title("Test 6: Verify cell value in a table grid")
-@allure.description("This test navigates to Test 6 grid, retrieves the value of a specific cell, and verifies it")
+@allure.description("This test navigates to Test 6 grid, retrieves the value of a specific cell and verifies it")
 def test_6_table_cell_value(driver):
-    """Test 6: Retrieve and verify the value of a specific cell in a table."""
 
     with allure.step("Navigate to the home page"):
         driver.get(BASE_URL)
@@ -261,11 +258,9 @@ def test_6_table_cell_value(driver):
             return cell.text.strip()
 
     with allure.step("Retrieve the value of the cell at coordinates (2, 2)"):
-        # Get the value of the cell at row 2, column 2 (0-based)
+        # Get the value of the cell at row 2, column 2 
         cell_value = get_table_cell_value(table, 2, 2)
-        print(f"Value at (2, 2): {cell_value}")
 
     with allure.step("Assert the value of the cell is 'Ventosanzap'"):
         # Assert the value of the cell is "Ventosanzap"
         assert cell_value == "Ventosanzap", f"Expected 'Ventosanzap', but got '{cell_value}'"
-        print("The value of the cell at (2, 2) is correctly 'Ventosanzap'.")

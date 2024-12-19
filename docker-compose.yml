@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  selenium-python-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4040:4040"
+    volumes:
+      - ./reports:/app/reports
+      - ./allure-report:/app/allure-report
+    environment:
+      - CI=true  
+    shm_size: "2g"  
+    container_name: selenium-python-tests
