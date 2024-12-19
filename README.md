@@ -55,6 +55,7 @@ This repository includes two GitHub Actions workflows:
 ```bash
 git clone <repository-url>
 cd <repository-name>
+```
 
 ### **2. Set Up a Python Virtual Environment**
 Create and activate a virtual environment:
@@ -63,28 +64,33 @@ Create and activate a virtual environment:
 # On Linux/MacOS
 python3 -m venv venv
 source venv/bin/activate
+```
 
 ```bash
 # On Windows
 python -m venv venv
 venv\Scripts\activate
+```
 
 ### **3. Install Dependencies**
 Install the required Python packages from `requirements.txt`:
 
 ```bash
 pip install -r requirements.txt
+```
 
 ### **4. Run the Selenium Tests**
 Run the Selenium tests using Pytest. This will execute the test cases and generate the test results in a directory that can later be used to create an Allure Report:
 
 ```bash
 pytest --alluredir=reports
+```
 
 ### **5. View the Allure Report**
 
 ```bash
 allure serve reports
+```
 
 ## **GitHub Actions Workflow**
 
