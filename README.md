@@ -129,18 +129,3 @@ pytest --alluredir=reports
 allure serve reports
 ```
 
----
-
-## Folder Structure
-
-```plaintext
-├── .github/
-│   └── workflows/          
-│       ├── deploy-s3.yml   
-│       └── selenium-tests.yml 
-├── resources/
-│   └── QE-index.html       
-├── tests/
-│   ├── test_assessment.py  
-├── requirements.txt        
-├── README.md               
