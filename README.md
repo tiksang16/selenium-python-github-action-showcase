@@ -89,8 +89,8 @@ This repository includes two GitHub Actions workflows:
 
 ### **1. Clone the Repository**
 ```bash
-git clone <repository-url>
-cd <repository-name>
+git clone https://github.com/tiksang16/selenium-python-github-action-showcase.git
+cd selenium-python-github-action-showcase
 ```
 
 ### **2. Set Up a Python Virtual Environment**
