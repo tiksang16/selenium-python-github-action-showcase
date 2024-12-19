@@ -9,15 +9,13 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
-# Base URL for the HTML file
 BASE_URL = "http://selenium-python-resolver.s3-website.us-east-2.amazonaws.com/"  
 
 @pytest.fixture(scope="function")
 def driver():
-    # Set Chrome options
     chrome_options = Options()
 
-    # Check if the script is running in CI/CD (e.g., GitHub Actions)
+    # Check if the script is running in CI/CD (GitHub Action)
     if os.getenv("CI") or os.getenv("HEADLESS"):  
         chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
