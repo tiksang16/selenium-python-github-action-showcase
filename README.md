@@ -1,12 +1,24 @@
 # Selenium Python Testing Project
 
-This repository is designed to demonstrate automated testing using **Selenium** with Python and an integrated workflow for deploying test sites and reports. It includes the following:
+This repository is designed to demonstrate automated testing using **Selenium** with **Python** and an integrated workflow for deploying test sites and reports. It includes the following:
 
-1. A test site hosted on AWS S3: [Test Site](http://selenium-python-resolver.s3-website.us-east-2.amazonaws.com/)
+1. A test site hosted on **AWS S3**: [Test Site](http://selenium-python-resolver.s3-website.us-east-2.amazonaws.com/)
 2. Automated Selenium tests that generate an **Allure Report**.
-3. GitHub Actions workflows to:
+3. **GitHub Actions** workflows to:
    - Automatically deploy the test site to AWS S3 when changes are made.
    - Run Selenium tests, generate an Allure Report, and deploy the report to AWS S3: [Allure Report](https://allure-report-resolver.s3.us-east-2.amazonaws.com/index.html).
+
+---
+
+## Accessing the Hosted URLs
+
+- **Test Site:**  
+  The test site is hosted on AWS S3 and accessible at:  
+  [http://selenium-python-resolver.s3-website.us-east-2.amazonaws.com/](http://selenium-python-resolver.s3-website.us-east-2.amazonaws.com/)
+
+- **Allure Test Report:**  
+  The Allure report is hosted on AWS S3 and accessible at:  
+  [https://allure-report-resolver.s3.us-east-2.amazonaws.com/index.html](https://allure-report-resolver.s3.us-east-2.amazonaws.com/index.html)
 
 ---
 
@@ -49,6 +61,17 @@ This repository includes two GitHub Actions workflows:
 
 ---
 
+## How to Trigger Tests Manually on GitHub Actions
+
+1. Navigate to the **Actions** tab in the GitHub repository.
+2. Select the **Run Selenium Tests and Deploy Allure Report** workflow.
+3. Click on **Run workflow** and follow the instructions.
+
+#### **Once the pipeline completes:**
+- Test results will be available in - [Allure Report URL](https://allure-report-resolver.s3.us-east-2.amazonaws.com/index.html)
+
+---
+
 ## **How to Run the Tests Locally**
 
 ### **1. Clone the Repository**
@@ -60,14 +83,14 @@ cd <repository-name>
 ### **2. Set Up a Python Virtual Environment**
 Create and activate a virtual environment:
 
+#### On Linux/MacOS
 ```bash
-# On Linux/MacOS
 python3 -m venv venv
 source venv/bin/activate
 ```
 
+#### On Windows
 ```bash
-# On Windows
 python -m venv venv
 venv\Scripts\activate
 ```
@@ -92,69 +115,18 @@ pytest --alluredir=reports
 allure serve reports
 ```
 
-## **GitHub Actions Workflow**
-
-### 1. **Deploy Test Site to AWS S3**
-The `deploy-s3.yml` workflow automatically deploys the `QE-index.html` file to the S3 bucket whenever it is updated.
-
-#### **Trigger**
-- Push to `resources/QE-index.html`.
-
-#### **Process**
-1. Checks out the repository.
-2. Configures AWS credentials using GitHub Secrets.
-3. Deploys `QE-index.html` to the specified AWS S3 bucket.
-
----
-
-### 2. **Run Selenium Tests and Deploy Allure Report**
-The `selenium-tests.yml` workflow runs Selenium tests and deploys the Allure report to AWS S3.
-
-#### **Trigger**
-- Push to the `main` branch.
-- Manual trigger via `workflow_dispatch`.
-
-#### **Process**
-1. Checks out the repository.
-2. Sets up Python and installs dependencies from `requirements.txt`.
-3. Installs Chrome and its dependencies on the GitHub Actions runner.
-4. Runs Selenium tests using `Pytest` and generates test results in the `reports` directory.
-5. Installs Allure CLI and generates an interactive Allure report.
-6. Uploads the generated Allure report to the specified S3 bucket.
-
----
-
-## How to Trigger Tests Manually on GitHub Actions
-
-1. Navigate to the **Actions** tab in the GitHub repository.
-2. Select the **Run Selenium Tests and Deploy Allure Report** workflow.
-3. Click on **Run workflow** and follow the instructions.
-
-#### **Once the pipeline completes:**
-- Test results will be available in the Allure Report.
-
----
-
-## Accessing the Hosted URLs
-
-- **Test Site:**  
-  The test site is hosted on AWS S3 and accessible at:  
-  [http://selenium-python-resolver.s3-website.us-east-2.amazonaws.com/](http://selenium-python-resolver.s3-website.us-east-2.amazonaws.com/)
-
-- **Allure Test Report:**  
-  The Allure report is hosted on AWS S3 and accessible at:  
-  [https://allure-report-resolver.s3.us-east-2.amazonaws.com/index.html](https://allure-report-resolver.s3.us-east-2.amazonaws.com/index.html)
-
 ---
 
 ## Folder Structure
 
 ```plaintext
+├── .github/
+│   └── workflows/          
+│       ├── deploy-s3.yml   
+│       └── selenium-tests.yml 
 ├── resources/
-│   └── QE-index.html       # Test site HTML file
+│   └── QE-index.html       
 ├── tests/
-│   ├── test_assessment.py  # Selenium test cases
-├── requirements.txt        # Python dependencies
-├── deploy-s3.yml           # GitHub Actions workflow for deploying QE-index.html
-├── selenium-tests.yml      # GitHub Actions workflow for running Selenium tests and deploying Allure reports
-├── README.md               # Project documentation
+│   ├── test_assessment.py  
+├── requirements.txt        
+├── README.md               
