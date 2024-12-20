@@ -72,6 +72,9 @@ This repository includes two GitHub Actions workflows:
 ### **CI/CD**
 - **GitHub Actions**: For automating deployment and testing pipelines.
 
+### **Containerization**
+- **Docker**: To containerize the testing environment and run tests in Docker containers.
+
 ---
 
 ## How to Trigger Tests Manually on GitHub Actions
