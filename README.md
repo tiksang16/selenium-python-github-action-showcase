@@ -129,3 +129,36 @@ pytest --alluredir=reports
 allure serve reports
 ```
 
+---
+
+## **Future Improvement**
+
+In the future, the project will include enhanced support for running tests using **Docker** across all platforms, including **macOS**. Currently, This project is limited to **Windows systems** due to compatibility issues between **ARM64** (used by M1/M2 macOS systems) and **AMD64** architectures. Resolving this limitation is a priority for future updates.
+
+### **Run Tests Using Docker (Windows Only)**
+
+You can use Docker to set up the environment and run tests without installing dependencies directly on your system. Follow the steps below to get started:
+
+### **Prerequisites**
+1. **Install Docker Desktop**  
+   - Download and install Docker Desktop from the [official Docker website](https://www.docker.com/products/docker-desktop/).
+   - Ensure Docker is running on your system.
+
+2. **Clone the Repository**  
+   If you haven't already, clone the project repository:
+   ```bash
+   git clone https://github.com/tiksang16/selenium-python-github-action-showcase.git
+   cd selenium-python-github-action-showcase
+   ```
+
+### **Steps to Run Tests Using Docker**
+1. **Build the Docker Image**  
+    ```bash
+   docker-compose build
+   ```
+
+2. **Run the Container, Run the test and View the Allure report on http://localhost:4040/index.html**  
+    ```bash
+   docker-compose build
+   ```
+   
