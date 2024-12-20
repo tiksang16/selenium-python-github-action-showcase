@@ -1,6 +1,5 @@
 FROM python:3.13
 
-# Install prerequisites and dependencies
 RUN apt-get update && apt-get install -y \
     wget \
     gnupg \
