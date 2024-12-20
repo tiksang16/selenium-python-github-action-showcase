@@ -64,7 +64,7 @@ This repository includes two GitHub Actions workflows:
 ### **Testing Frameworks and Tools**
 - **Selenium**: For automating browser interactions.
 - **Pytest**: For organizing and running test cases.
-- **Allure**: For generating detailed and interactive test reports.
+- **Allure**: For generating test reports.
 
 ### **Cloud Services**
 - **AWS S3**: For hosting the test site and Allure reports.
